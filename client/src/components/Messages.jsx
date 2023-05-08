@@ -21,13 +21,15 @@ const Messages = ({ messages, isLoading, setMessages }) => {
   return (
     <div className="flex flex-col gap-3 py-3 overflow-y-scroll scrollbar-hide h-96">
       <AnimatePresence>
-        {messages.map((item) => (
-          <ChatCard
-            key={item.id}
-            handleDelete={handleDelete}
-            {...item}
-          ></ChatCard>
-        ))}
+        {messages.map((item) => {
+          return (
+            <ChatCard
+              key={item.id}
+              handleDelete={handleDelete}
+              {...item}
+            ></ChatCard>
+          );
+        })}
       </AnimatePresence>
 
       {messages.length === 0 && (

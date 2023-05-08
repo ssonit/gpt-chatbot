@@ -1,10 +1,18 @@
 import moment from "moment/moment";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Typewriter from "typewriter-effect";
+import TypingEffect from "./TypingEffect";
+// import { Typewriter } from "react-simple-typewriter";
 
 const ChatCard = ({ type, message, createdAt, id, handleDelete }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isTyping, setIsTyping] = useState(true);
+  const handleType = (count) => {
+    console.log(count);
+  };
+
+  const handleDone = () => {
+    setIsTyping(false);
+  };
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
@@ -16,24 +24,25 @@ const ChatCard = ({ type, message, createdAt, id, handleDelete }) => {
           : "bg-[#7a99fe] rounded-bl-2xl ml-auto"
       } rounded-t-2xl p-2 max-w-[70%] w-full relative`}
     >
-      {isLoading ? (
+      {/* {isTyping && type === "bot" ? (
         <Typewriter
-          onInit={(typewriter) => {
-            typewriter
-              .typeString(message)
-              .callFunction(() => {
-                console.log("String typed out!");
-              })
-              .pauseFor(30)
-              .start()
-              .callFunction(() => {
-                setIsLoading(false);
-              });
-          }}
+          words={[message]}
+          loop={2}
+          cursor
+          cursorStyle="|"
+          typeSpeed={30}
+          deleteSpeed={50}
+          delaySpeed={1000}
+          onLoopDone={handleDone}
+          onType={handleType}
         />
       ) : (
         <p>{message}</p>
-      )}
+      )} */}
+
+      <p>{message}</p>
+      {/* {type === "bot" ? <TypingEffect message={message} /> : <p>{message}</p>} */}
+
       <div className={`text-xs mt-2 ${type === "bot" && "text-[#949494]"}`}>
         {moment(createdAt).format("LT")}
       </div>
